@@ -1,11 +1,11 @@
 from setuptools import setup, find_packages
 setup(
-    name="docker_gym",
+    name="remote_gym",
     version="0.1",
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'docker_gym_server = docker_gym.server:main',
+            'remote_gym_server = remote_gym.server:main',
         ]
     },
     install_requires=[
