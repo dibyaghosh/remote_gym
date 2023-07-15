@@ -11,8 +11,8 @@
 FROM nvidia/cudagl:11.4.1-runtime
 ENV DEBIAN_FRONTEND=noninteractive 
 RUN apt-get update && \
-    apt-get -y install xvfb ffmpeg git build-essential
-RUN apt-get -y install wget unzip software-properties-common \
+    apt-get -y install xvfb ffmpeg git build-essential \
+    wget unzip software-properties-common \
     libgl1-mesa-dev \
     libgl1-mesa-glx \
     libglew-dev \
@@ -72,13 +72,10 @@ RUN set -x && \
 
 
 # MY CODE
-RUN conda create -n env python=3.8
-RUN echo "source activate env" > ~/.bashrc
+RUN conda create -n env python=3.8 && echo "source activate env" > ~/.bashrc
 ENV PATH /opt/conda/envs/env/bin:$PATH
-RUN echo $(which python)
-RUN pip install git+https://github.com/dibyaghosh/remote_gym.git
-RUN pip install gym==0.23.1
-RUN pip install dm_control
-
-
-CMD [""]
+RUN pip install git+https://github.com/dibyaghosh/remote_gym.git && \
+    pip install setuptools==65.5.0 && \
+    pip install gym==0.21.0 dm_control cffi
+EXPOSE 8000
+CMD ["remote_gym_server"]
