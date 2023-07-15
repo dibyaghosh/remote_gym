@@ -86,7 +86,10 @@ class Server:
         o = self.envs[instance_id].reset()
         return_dict = {'observation': o}
         return json_response(return_dict)
-    
-if __name__ == "__main__":
+
+def main():
     server = Server()
     server.run()
+
+if __name__ == "__main__":
+    main()

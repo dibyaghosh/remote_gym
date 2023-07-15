@@ -6,7 +6,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'docker_gym_server = docker_gym.server',
+            'docker_gym_server = docker_gym.server:main',
         ]
     }
 )
