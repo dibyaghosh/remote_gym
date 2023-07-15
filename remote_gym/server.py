@@ -13,6 +13,7 @@ import uvicorn
 
 import logging
 import gym
+import uuid
 
 def json_response(obj):
     return JSONResponse(json_numpy.dumps(obj))
@@ -49,7 +50,7 @@ class Server:
         env_name = payload['env_name']
         kwargs = payload['env_kwargs']
         env = gym.make(env_name, **kwargs)
-        id = len(self.envs)
+        id = uuid.uuid1().int
         self.envs[id] = env
         return json_response({
             'instance_id': id,
