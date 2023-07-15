@@ -1,5 +1,5 @@
 from setuptools import setup, find_packages
-
+print(find_packages())
 setup(
     name="docker_gym",
     version="0.1",
