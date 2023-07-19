@@ -17,18 +17,20 @@ pip install git+https://github.com/dibyaghosh/remote_gym.git
 On the remote client, start the server:
 
 ```bash
-remote_gym_server # starts the server on port 8000
+remote_gym_server # starts the server on port 8000 by default
 ```
 
 On the local client, you can now connect:
 ```python
-from remote_gym.client import RemoteEnv
+from remote_gym.http_client import RemoteEnv
 env = RemoteEnv.make('CartPole-v0', url='0.0.0.0:8000')
 ```
 
+Uses HTTP requests to communicate between the client and server (might add rpyc also in the future).
+
 ## Docker Setup
 
-A Dockerfile is provided to run the server in a Docker container. 
+A Dockerfile is provided to help isolate your server in a Docker container. 
 
 ```bash
 docker run -p 8000:8000 --gpus all -it dibyaghosh/docker_gym_base
@@ -40,3 +42,5 @@ If you want to put your own environment in the container, you can simply start f
 FROM dibyaghosh/docker_gym_base
 pip install your_env
 ```
+
+

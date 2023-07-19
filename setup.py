@@ -5,7 +5,7 @@ setup(
     packages=find_packages(),
     entry_points={
         'console_scripts': [
-            'remote_gym_server = remote_gym.server:main',
+            'remote_gym_server = remote_gym.http_server:main',
         ]
     },
     install_requires=[

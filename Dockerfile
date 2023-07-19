@@ -69,13 +69,17 @@ RUN set -x && \
     /opt/conda/bin/conda clean -afy
 
 
+#####
+# My code starts here
+####
 
-
-# MY CODE
 RUN conda create -n env python=3.8 && echo "source activate env" > ~/.bashrc
 ENV PATH /opt/conda/envs/env/bin:$PATH
-RUN pip install git+https://github.com/dibyaghosh/remote_gym.git && \
-    pip install setuptools==65.5.0 && \
+RUN pip install setuptools==65.5.0 && \
     pip install gym==0.21.0 dm_control cffi
+ADD . /remote_gym
+RUN cd /remote_gym && pip install -e .
+# or RUN pip install git+https://github.com/dibyaghosh/remote_gym.git
+
 EXPOSE 8000
 CMD ["remote_gym_server"]
