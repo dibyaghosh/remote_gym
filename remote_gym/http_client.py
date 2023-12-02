@@ -51,3 +51,6 @@ class RemoteEnv(gym.Env):
     def step(self, action):
         response = self.query_endpoint('step', {'action': action})
         return response['next_observation'], response['reward'], response['done'], response['info']
+
+# Create an env either by env = RemoteEnv.make(env_name) or by env = gym.make('remote-env-v0', env_name)
+gym.register('remote-env-v0', RemoteEnv.make)

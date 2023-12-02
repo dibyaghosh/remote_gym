@@ -53,7 +53,7 @@ class HttpServer:
             'action_space': serialize_space(env.action_space),
         })
 
-    def get_info(self, instance_id: int):
+    def get_info(self, instance_id: str):
         env = self.base_server.get_env(instance_id)
         return json_response({
             'observation_space': serialize_space(env.observation_space),
