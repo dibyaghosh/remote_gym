@@ -90,15 +90,19 @@ class HttpServer:
         attr = payload["attr"]
         env = self.base_server.get_env(instance_id)
         nested = attr.split(".")
-        return_value = env
-        for attr in nested:
-            return_value = getattr(return_value, attr)
+        try:
+            return_value = env
+            for attr in nested:
+                return_value = getattr(return_value, attr)
 
-        if "kwargs" in payload or "args" in payload:
-            kwargs = payload.get("kwargs", {})
-            args = payload.get("args", [])
-            return_value = return_value(*args, **kwargs)
-        return json_response({"attr": return_value})
+            if "kwargs" in payload or "args" in payload:
+                kwargs = payload.get("kwargs", {})
+                args = payload.get("args", [])
+                return_value = return_value(*args, **kwargs)
+            return json_response({"attr": return_value})
+        except Exception as e:
+            logging.exception(e)
+            return json_response({})
 
 
 def main():

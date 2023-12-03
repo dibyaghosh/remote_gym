@@ -86,8 +86,12 @@ class RemoteEnv(gym.Env):
         )
 
     def __getattr__(self, attr):
-        response = self.query_endpoint("get_attr", {"attr": attr})
-        return response["attr"]
+        try:
+            response = self.query_endpoint("get_attr", {"attr": attr})
+            return response["attr"]
+        except Exception as e:
+            print(e)
+            raise AttributeError(f"Attribute {attr} not found on server env.")
 
 
 # Create an env either by env = RemoteEnv.make(env_name) or by env = gym.make('remote-env-v0', env_name)
