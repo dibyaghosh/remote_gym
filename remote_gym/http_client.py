@@ -91,4 +91,4 @@ class RemoteEnv(gym.Env):
 
 
 # Create an env either by env = RemoteEnv.make(env_name) or by env = gym.make('remote-env-v0', env_name)
-gym.register("remote-env-v0", RemoteEnv.make)
+gym.register("remote-env-v0", entry_point=RemoteEnv.make)
